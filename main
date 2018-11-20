@@ -20,10 +20,10 @@ test $# -ge 1 || {
 
 action=install
 case "=$1" in
-install)
+=install)
   shift
   ;;
-remove)
+=remove)
   action=remove
   shift
   ;;
