@@ -13,6 +13,10 @@ test -x $apt || {
   }
 }
 
+sudo=
+test x${USER} = "xroot" ||
+  sudo=sudo
+
 test $# -ge 1 || {
   log Missing action
   exit 1
