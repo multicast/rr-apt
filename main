@@ -34,4 +34,4 @@ case "=$1" in
 esac
 
 export DEBIAN_FRONTEND=noninteractive
-exec $apt $action -y --no-install-recommends $*
+exec $sudo $apt $action -y --no-install-recommends $*
