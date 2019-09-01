@@ -22,6 +22,17 @@ test $# -ge 1 || {
   exit 1
 }
 
+doUpdate() {
+  cd /var/lib/apt
+  touch --date="$(date -d 4+hours+ago)" lastupdate-stamp
+  test lastupdate -nt lastupdate-stamp && {
+    rm lastupdate-stamp
+    exit 0
+  }
+  touch lastupdate
+  exec $sudo $apt update
+}
+
 action=install
 case "=$1" in
 =install)
@@ -31,6 +42,10 @@ case "=$1" in
   action=remove
   shift
   ;;
+=update)
+  doUpdate
+  exit 0
+  ;;  
 esac
 
 export DEBIAN_FRONTEND=noninteractive
