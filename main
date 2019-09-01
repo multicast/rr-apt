@@ -4,6 +4,8 @@ set -e
 set -u
 source ${RRCONFINC}
 
+tmpdir=${XDG_RUNTIME_DIR:-/run/user/$(id -u)}
+
 apt=${APT:-/usr/bin/apt-get}
 test -x $apt || {
   apt=/usr/bin/apt
@@ -23,7 +25,7 @@ test $# -ge 1 || {
 }
 
 doUpdate() {
-  cd /var/lib/apt
+  cd $tmpdir
   touch --date="$(date -d 4+hours+ago)" lastupdate-stamp
   test lastupdate -nt lastupdate-stamp && {
     rm lastupdate-stamp
