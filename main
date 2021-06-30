@@ -39,6 +39,7 @@ action=install
 case "=$1" in
 =install)
   shift
+  test -f /var/lib/dpkg/info/$1.list && exit 0
   ;;
 =remove)
   action=remove
